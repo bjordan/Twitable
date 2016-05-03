@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Twitable.BusinessRuleEngine
 {
-    public class Class1
+    public class TwitManager
     {
+        public TwitManager()
+        {
+            
+        }
+         
     }
 }
