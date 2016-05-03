@@ -5,7 +5,6 @@ using System.Linq;
 using Twitable.EntityManager;
 using Twitable.EntityManager.Filter;
 using Twitable.RepositoryManager.Interfaces;
-using Twitable.Utils;
 
 namespace Twitable.RepositoryManager
 {
@@ -13,15 +12,12 @@ namespace Twitable.RepositoryManager
     {
         private readonly string _userFilePath;
 
-        //public UserRepository() : this(Path.Combine(Config.SourceDirectory, Config.UserFile))
-        //{
-
-        //}
 
         public UserRepository(string userFilePath)
         {
             _userFilePath = userFilePath;
         }
+
         /// <summary>
         /// Loads all files from the pre-defined user File
         /// </summary>
@@ -40,14 +36,29 @@ namespace Twitable.RepositoryManager
                     //add the user
                     allUserList.Add(user);
                     //then the people followed
-                    allUserList.AddRange(user.Following.Select(leader => new User { UserName = leader }));
+                    allUserList.AddRange(user.Following.Select(leader => new User {UserName = leader}));
                 }
             }
             //ensure distinct users in the list
             var distinctUserList = SetDistinctUsers(allUserList);
             //update followers per user
-            var userList = UpdateUserFollowers(distinctUserList );
+            var userList = UpdateUserFollowers(distinctUserList);
             return userList.AsEnumerable();
+        }
+
+        /// <summary>
+        /// Search by filter.
+        /// </summary>
+        /// <param name="filter">User filter</param>
+        /// <returns>a filtered list</returns>
+        public IEnumerable<User> GetByFilter(UserFilter filter)
+        {
+            var query = GetAll();
+            if (!string.IsNullOrEmpty(filter.UserName))
+                query = query.Where(x => x.UserName.Equals(filter.UserName));
+            if (!string.IsNullOrEmpty(filter.Following))
+                query = query.Where(x => x.Following.Any(y => y.Equals(filter.Following)));
+            return query;
         }
 
         private IQueryable<User> SetDistinctUsers(IEnumerable<User> list)
@@ -65,24 +76,23 @@ namespace Twitable.RepositoryManager
                 {
                     //if already on the list, combine the list of people that the user follows.
                     var tempUser = distinctList.FirstOrDefault(x => x.UserName.Equals(username));
-                  
-                        var index = distinctList.IndexOf(tempUser);
-                        var followingList = new List<string>();
-                        if (tempUser.Following != null)
-                            followingList.AddRange(tempUser.Following);
-                        if (user.Following != null)
-                            followingList.AddRange(user.Following);
-                        tempUser.Following = followingList.Distinct().AsQueryable();
-                        distinctList[index] = tempUser;
-                  
+
+                    var index = distinctList.IndexOf(tempUser);
+                    var followingList = new List<string>();
+                    if (tempUser.Following != null)
+                        followingList.AddRange(tempUser.Following);
+                    if (user.Following != null)
+                        followingList.AddRange(user.Following);
+                    tempUser.Following = followingList.Distinct().AsQueryable();
+                    distinctList[index] = tempUser;
+
                 }
             }
             return distinctList.AsQueryable();
         }
 
-
         private IEnumerable<User> UpdateUserFollowers(IQueryable<User> tempUserList)
-        {   
+        {
             foreach (var user in tempUserList)
             {
                 var username = user.UserName;
@@ -103,20 +113,15 @@ namespace Twitable.RepositoryManager
             if (line.IndexOf("follows", StringComparison.CurrentCultureIgnoreCase) >= 0)
             {
                 var names = line.Split(new[] {"follows"}, StringSplitOptions.None);
-                user.UserName = names[0].Trim(); 
-                user.Following = names[1].Split(',').Select(s => s.Trim()).AsQueryable();//trim names  
+                user.UserName = names[0].Trim();
+                user.Following = names[1].Split(',').Select(s => s.Trim()).AsQueryable(); //trim names  
             }
-            else { throw new InvalidDataException("Unable to process the user file, due to an invalid format.");}
+            else
+            {
+                throw new InvalidDataException("Unable to process the user file, due to an invalid format.");
+            }
             return user;
         }
 
-
-
-
-        public IEnumerable<User> GetByFilter(UserFilter filter)
-        {
-            throw new NotImplementedException();
-        }
     }
-
 }
