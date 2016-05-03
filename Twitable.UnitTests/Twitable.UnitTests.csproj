@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,8 +51,25 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TestUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Twitable.EntityManager\Twitable.EntityManager.csproj">
+      <Project>{e5877ef0-9d5b-4944-a8eb-a1f5728f7235}</Project>
+      <Name>Twitable.EntityManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Twitable.RepositoryManager\Twitable.RepositoryManager.csproj">
+      <Project>{4efb9ce0-61ef-40b8-9d96-79053d5a3cd3}</Project>
+      <Name>Twitable.RepositoryManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Twitable.Utils\Twitable.Utils.csproj">
+      <Project>{7b2d5ef9-66ef-4863-a352-9a4c8878a212}</Project>
+      <Name>Twitable.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

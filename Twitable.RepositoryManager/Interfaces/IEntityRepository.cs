@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Twitable.RepositoryManager.Interfaces
 {
-    interface IEntityRepository<T, TFilter>
+    public interface IEntityRepository<T, TFilter>
     {
         IEnumerable<T> GetAll();
         IEnumerable<T> GetByFilter(TFilter filter); 
