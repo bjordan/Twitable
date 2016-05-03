@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Twitable.EntityManager;
 using Twitable.EntityManager.Filter;
 using Twitable.RepositoryManager.Interfaces;
-using Twitable.RepositoryManager.Mappers;
 using Twitable.Utils;
 
 namespace Twitable.RepositoryManager
@@ -16,10 +13,10 @@ namespace Twitable.RepositoryManager
     {
         private readonly string _userFilePath;
 
-        public UserRepository() : this(Path.Combine(Config.SourceDirectory, Config.UserFile))
-        {
+        //public UserRepository() : this(Path.Combine(Config.SourceDirectory, Config.UserFile))
+        //{
 
-        }
+        //}
 
         public UserRepository(string userFilePath)
         {
@@ -31,8 +28,8 @@ namespace Twitable.RepositoryManager
         /// <returns>A list of twitter users with followers and those they follow</returns>
         public IEnumerable<User> GetAll()
         {
-            var tempUserList = new List<User>();
-            //first load all users in the file and assign the users they follow
+            var allUserList = new List<User>();
+            //load all users and the people they follow
             using (var reader = new StreamReader(_userFilePath))
             {
 
@@ -41,15 +38,15 @@ namespace Twitable.RepositoryManager
                 {
                     var user = (UserMapper(line));
                     //add the user
-                    tempUserList.Add(user);
-                    //add the followed users
-                    tempUserList.AddRange(user.Following.Select(leader => new User {UserName = leader}));
+                    allUserList.Add(user);
+                    //then the people followed
+                    allUserList.AddRange(user.Following.Select(leader => new User { UserName = leader }));
                 }
             }
-            //merge duplicate usernames and the people followed
-            var mergedUserList = SetDistinctUsers(tempUserList);
-
-            var userList = UpdateUserFollowers(mergedUserList.ToList());
+            //ensure distinct users in the list
+            var distinctUserList = SetDistinctUsers(allUserList);
+            //update followers per user
+            var userList = UpdateUserFollowers(distinctUserList );
             return userList.AsEnumerable();
         }
 
@@ -59,31 +56,32 @@ namespace Twitable.RepositoryManager
             foreach (var user in list)
             {
                 var username = user.UserName;
+                //Add the user if not already on the list
                 if (!distinctList.Any(x => x.UserName.Equals(username)))
                 {
                     distinctList.Add(user);
                 }
                 else
                 {
+                    //if already on the list, combine the list of people that the user follows.
                     var tempUser = distinctList.FirstOrDefault(x => x.UserName.Equals(username));
-                    if (tempUser != null)
-                    {
+                  
                         var index = distinctList.IndexOf(tempUser);
-                        List<string> followingList = new List<string>();
+                        var followingList = new List<string>();
                         if (tempUser.Following != null)
                             followingList.AddRange(tempUser.Following);
                         if (user.Following != null)
                             followingList.AddRange(user.Following);
                         tempUser.Following = followingList.Distinct().AsQueryable();
                         distinctList[index] = tempUser;
-                    }
+                  
                 }
             }
             return distinctList.AsQueryable();
         }
 
 
-        private IEnumerable<User> UpdateUserFollowers(List<User> tempUserList)
+        private IEnumerable<User> UpdateUserFollowers(IQueryable<User> tempUserList)
         {   
             foreach (var user in tempUserList)
             {
@@ -104,10 +102,11 @@ namespace Twitable.RepositoryManager
             var user = new User();
             if (line.IndexOf("follows", StringComparison.CurrentCultureIgnoreCase) >= 0)
             {
-                var names = line.Split(new string[] {"follows"}, StringSplitOptions.None);
+                var names = line.Split(new[] {"follows"}, StringSplitOptions.None);
                 user.UserName = names[0].Trim(); 
                 user.Following = names[1].Split(',').Select(s => s.Trim()).AsQueryable();//trim names  
             }
+            else { throw new InvalidDataException("Unable to process the user file, due to an invalid format.");}
             return user;
         }
 
