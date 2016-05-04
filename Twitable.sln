@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.ConsoleTest", "Twitable.ConsoleTest\Twitable.ConsoleTest.csproj", "{C7B7BE4D-ECEA-4D6E-A106-3D49AA69B2C2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.EntityManager", "Twitable.EntityManager\Twitable.EntityManager.csproj", "{E5877EF0-9D5B-4944-A8EB-A1F5728F7235}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.BusinessRuleEngine", "Twitable.BusinessRuleEngine\Twitable.BusinessRuleEngine.csproj", "{C91AAEB5-4E95-4CDD-A5FF-1BD8E99FD046}"
@@ -15,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.UnitTests", "Twita
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.Repository.Interfaces", "Twitable.Repository.Interfaces\Twitable.Repository.Interfaces.csproj", "{62566032-EA07-484C-80AB-41CDF179EB58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.FileRepository", "Twitable.FileRepository\Twitable.FileRepository.csproj", "{EFB13C86-5094-4010-B8EC-1F840CD6C590}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.EntityRepository", "Twitable.EntityRepository\Twitable.EntityRepository.csproj", "{C1E41D49-E922-4758-A320-55FE252B233D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitable.TwitConsole", "Twitable.TwitConsole\Twitable.TwitConsole.csproj", "{5C727C65-A0B6-449B-9DD2-8BD58B807072}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C7B7BE4D-ECEA-4D6E-A106-3D49AA69B2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7B7BE4D-ECEA-4D6E-A106-3D49AA69B2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7B7BE4D-ECEA-4D6E-A106-3D49AA69B2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7B7BE4D-ECEA-4D6E-A106-3D49AA69B2C2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5877EF0-9D5B-4944-A8EB-A1F5728F7235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5877EF0-9D5B-4944-A8EB-A1F5728F7235}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5877EF0-9D5B-4944-A8EB-A1F5728F7235}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,10 +43,14 @@ Global
 		{62566032-EA07-484C-80AB-41CDF179EB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62566032-EA07-484C-80AB-41CDF179EB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62566032-EA07-484C-80AB-41CDF179EB58}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFB13C86-5094-4010-B8EC-1F840CD6C590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFB13C86-5094-4010-B8EC-1F840CD6C590}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFB13C86-5094-4010-B8EC-1F840CD6C590}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFB13C86-5094-4010-B8EC-1F840CD6C590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1E41D49-E922-4758-A320-55FE252B233D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1E41D49-E922-4758-A320-55FE252B233D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1E41D49-E922-4758-A320-55FE252B233D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1E41D49-E922-4758-A320-55FE252B233D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C727C65-A0B6-449B-9DD2-8BD58B807072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C727C65-A0B6-449B-9DD2-8BD58B807072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C727C65-A0B6-449B-9DD2-8BD58B807072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C727C65-A0B6-449B-9DD2-8BD58B807072}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

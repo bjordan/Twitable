@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Twitable.EntityManager.Filter;
-using Twitable.FileRepository;
+using Twitable.EntityRepository;
 using Twitable.Repository.Interfaces;
 using Twitable.Utils;
 
@@ -13,6 +14,8 @@ namespace Twitable.UnitTests
     public class TestUserRepository
     {
         [TestMethod]
+        [ExpectedException(typeof(Exception),
+            "File contents invalid")]
         public void GetAllUsers()
         {
             IUserRepository rep = new UserRepository(Path.Combine(Config.SourceDirectory, Config.UserFile));
@@ -21,6 +24,8 @@ namespace Twitable.UnitTests
 
         }
         [TestMethod]
+        [ExpectedException(typeof(Exception),
+            "File contents invalid")]
         public void GetAllFollowers()
         {
             IUserRepository rep = new UserRepository(Path.Combine(Config.SourceDirectory, Config.UserFile));

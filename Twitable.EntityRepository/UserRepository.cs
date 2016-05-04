@@ -6,7 +6,7 @@ using Twitable.EntityManager;
 using Twitable.EntityManager.Filter;
 using Twitable.Repository.Interfaces;
 
-namespace Twitable.FileRepository
+namespace Twitable.EntityRepository
 {
     public class UserRepository : IUserRepository
     {

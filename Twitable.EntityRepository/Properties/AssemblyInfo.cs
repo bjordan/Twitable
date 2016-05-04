@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Twitable.FileRepository")]
+[assembly: AssemblyTitle("Twitable.EntityRepository")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Twitable.FileRepository")]
+[assembly: AssemblyProduct("Twitable.EntityRepository")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("84d490a3-32ae-4159-9b11-c28fd5e7a19d")]
+[assembly: Guid("3ca6748c-a3e7-4124-bb63-26a68b86d8e5")]
 
 // Version information for an assembly consists of the following four values:
 //

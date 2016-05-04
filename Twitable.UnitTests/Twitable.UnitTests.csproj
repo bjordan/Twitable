@@ -51,17 +51,23 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestTwitManager.cs" />
+    <Compile Include="TestTwitRepository.cs" />
     <Compile Include="TestUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Twitable.BusinessRuleEngine\Twitable.BusinessRuleEngine.csproj">
+      <Project>{c91aaeb5-4e95-4cdd-a5ff-1bd8e99fd046}</Project>
+      <Name>Twitable.BusinessRuleEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Twitable.EntityManager\Twitable.EntityManager.csproj">
       <Project>{e5877ef0-9d5b-4944-a8eb-a1f5728f7235}</Project>
       <Name>Twitable.EntityManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitable.FileRepository\Twitable.FileRepository.csproj">
-      <Project>{efb13c86-5094-4010-b8ec-1f840cd6c590}</Project>
-      <Name>Twitable.FileRepository</Name>
+    <ProjectReference Include="..\Twitable.EntityRepository\Twitable.EntityRepository.csproj">
+      <Project>{c1e41d49-e922-4758-a320-55fe252b233d}</Project>
+      <Name>Twitable.EntityRepository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Twitable.Repository.Interfaces\Twitable.Repository.Interfaces.csproj">
       <Project>{62566032-ea07-484c-80ab-41cdf179eb58}</Project>

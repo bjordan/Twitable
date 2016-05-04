@@ -35,6 +35,21 @@ namespace Twitable.Utils
             }
         }
 
+        public static string TweetRepositoryProvider
+        {
+            get
+            {
+                return ReadSetting("TweetRepositoryProvider");
+            }
+        }
+
+        public static string UserRepositoryProvider
+        {
+            get
+            {
+                return ReadSetting("UserRepositoryProvider");
+            }
+        }
         private static string ReadSetting(string key)
         {
             string str;

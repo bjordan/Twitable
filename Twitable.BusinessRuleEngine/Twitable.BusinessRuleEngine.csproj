@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepositoryFactory.cs" />
     <Compile Include="TwitManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -46,6 +47,10 @@
     <ProjectReference Include="..\Twitable.EntityManager\Twitable.EntityManager.csproj">
       <Project>{e5877ef0-9d5b-4944-a8eb-a1f5728f7235}</Project>
       <Name>Twitable.EntityManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Twitable.Repository.Interfaces\Twitable.Repository.Interfaces.csproj">
+      <Project>{62566032-ea07-484c-80ab-41cdf179eb58}</Project>
+      <Name>Twitable.Repository.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Twitable.Utils\Twitable.Utils.csproj">
       <Project>{7b2d5ef9-66ef-4863-a352-9a4c8878a212}</Project>

@@ -6,7 +6,7 @@ using Twitable.EntityManager;
 using Twitable.EntityManager.Filter;
 using Twitable.Repository.Interfaces;
 
-namespace Twitable.FileRepository
+namespace Twitable.EntityRepository
 {
     public class TwitRepository:ITwitRepository
     {
@@ -29,7 +29,7 @@ namespace Twitable.FileRepository
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    bool isValid = line.Contains(">") && line.Split('>').Length <= 140;
+                    bool isValid = line.Contains(">") && line.Split('>')[1].Length <= 140;
                     if (isValid)
                     {
                         var parts = line.Split('>');
