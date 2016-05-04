@@ -61,6 +61,7 @@ namespace Twitable.EntityRepository
             return query;
         }
 
+
         private IQueryable<User> SetDistinctUsers(IEnumerable<User> list)
         {
             var distinctList = new List<User>();
@@ -102,6 +103,16 @@ namespace Twitable.EntityRepository
             return tempUserList;
         }
 
+
+        private string ValidateFileContent(string line)
+        {
+            var result = string.Empty;
+            if (line.IndexOf("follows", StringComparison.CurrentCultureIgnoreCase) < 0)
+                result = string.Format("Line does not specify followed users: {0};{1}", line, Environment.NewLine);
+           
+            return result;
+        }
+
         /// <summary>
         /// Sets the users and the people that they follow
         /// </summary>
@@ -110,7 +121,8 @@ namespace Twitable.EntityRepository
         private User UserMapper(string line)
         {
             var user = new User();
-            if (line.IndexOf("follows", StringComparison.CurrentCultureIgnoreCase) >= 0)
+            var validationResult = ValidateFileContent(line);
+            if (string.IsNullOrEmpty(validationResult))
             {
                 var names = line.Split(new[] {"follows"}, StringSplitOptions.None);
                 user.UserName = names[0].Trim();
@@ -118,7 +130,7 @@ namespace Twitable.EntityRepository
             }
             else
             {
-                throw new Exception("Unable to process the user file, due to an invalid format.");
+                throw new Exception("Error - "+validationResult);
             }
             return user;
         }

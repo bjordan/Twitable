@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Twitable.EntityManager;
 using Twitable.EntityManager.Filter;
 using Twitable.Repository.Interfaces;
@@ -29,8 +30,8 @@ namespace Twitable.EntityRepository
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    bool isValid = line.Contains(">") && line.Split('>')[1].Length <= 140;
-                    if (isValid)
+                    var validationResult = ValidateFileContent(line);
+                    if (string.IsNullOrEmpty(validationResult))
                     {
                         var parts = line.Split('>');
                         var username = parts[0].Trim();
@@ -42,13 +43,23 @@ namespace Twitable.EntityRepository
                     }
                     else
                     {
-                        throw new Exception("The file provided, does not contain valid twits.");
+                        throw new Exception("Error - "+validationResult);
                     }
                 }
             }
             return twitList.AsQueryable();
         }
-         
+
+        private string ValidateFileContent(string line)
+        {
+            var result = string.Empty;
+            if (!line.Contains(">"))
+              result = string.Format("Line missing separator '>': {0};{1}", line,Environment.NewLine);
+            else if (line.Split('>')[1].Length > 140)
+                result = string.Format("twit more than 140 characters long: {0};{1}", line, Environment.NewLine);
+            return result;
+        }
+
         public IQueryable<Twit> GetByFilter(TwitFilter filter)
         {
             var query = GetAll();
