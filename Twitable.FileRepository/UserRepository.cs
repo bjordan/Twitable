@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using Twitable.EntityManager;
 using Twitable.EntityManager.Filter;
-using Twitable.RepositoryManager.Interfaces;
+using Twitable.Repository.Interfaces;
 
-namespace Twitable.RepositoryManager
+namespace Twitable.FileRepository
 {
     public class UserRepository : IUserRepository
     {
@@ -22,7 +22,7 @@ namespace Twitable.RepositoryManager
         /// Loads all files from the pre-defined user File
         /// </summary>
         /// <returns>A list of twitter users with followers and those they follow</returns>
-        public IEnumerable<User> GetAll()
+        public IQueryable<User> GetAll()
         {
             var allUserList = new List<User>();
             //load all users and the people they follow
@@ -43,7 +43,7 @@ namespace Twitable.RepositoryManager
             var distinctUserList = SetDistinctUsers(allUserList);
             //update followers per user
             var userList = UpdateUserFollowers(distinctUserList);
-            return userList.AsEnumerable();
+            return userList.AsQueryable();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Twitable.RepositoryManager
         /// </summary>
         /// <param name="filter">User filter</param>
         /// <returns>a filtered list</returns>
-        public IEnumerable<User> GetByFilter(UserFilter filter)
+        public IQueryable<User> GetByFilter(UserFilter filter)
         {
             var query = GetAll();
             if (!string.IsNullOrEmpty(filter.UserName))
@@ -118,7 +118,7 @@ namespace Twitable.RepositoryManager
             }
             else
             {
-                throw new InvalidDataException("Unable to process the user file, due to an invalid format.");
+                throw new Exception("Unable to process the user file, due to an invalid format.");
             }
             return user;
         }

@@ -3,8 +3,8 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Twitable.EntityManager.Filter;
-using Twitable.RepositoryManager;
-using Twitable.RepositoryManager.Interfaces;
+using Twitable.FileRepository;
+using Twitable.Repository.Interfaces;
 using Twitable.Utils;
 
 namespace Twitable.UnitTests

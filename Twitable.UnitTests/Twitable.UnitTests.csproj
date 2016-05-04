@@ -59,9 +59,13 @@
       <Project>{e5877ef0-9d5b-4944-a8eb-a1f5728f7235}</Project>
       <Name>Twitable.EntityManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Twitable.RepositoryManager\Twitable.RepositoryManager.csproj">
-      <Project>{4efb9ce0-61ef-40b8-9d96-79053d5a3cd3}</Project>
-      <Name>Twitable.RepositoryManager</Name>
+    <ProjectReference Include="..\Twitable.FileRepository\Twitable.FileRepository.csproj">
+      <Project>{efb13c86-5094-4010-b8ec-1f840cd6c590}</Project>
+      <Name>Twitable.FileRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Twitable.Repository.Interfaces\Twitable.Repository.Interfaces.csproj">
+      <Project>{62566032-ea07-484c-80ab-41cdf179eb58}</Project>
+      <Name>Twitable.Repository.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Twitable.Utils\Twitable.Utils.csproj">
       <Project>{7b2d5ef9-66ef-4863-a352-9a4c8878a212}</Project>
